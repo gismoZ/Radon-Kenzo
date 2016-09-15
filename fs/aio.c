@@ -119,6 +119,56 @@ unsigned long aio_max_nr = 0x10000; /* system wide maximum number of aio request
 static struct kmem_cache	*kiocb_cachep;
 static struct kmem_cache	*kioctx_cachep;
 
+static struct vfsmount *aio_mnt;
+
+static const struct file_operations aio_ring_fops;
+static const struct address_space_operations aio_ctx_aops;
+
+static struct file *aio_private_file(struct kioctx *ctx, loff_t nr_pages)
+{
+	struct qstr this = QSTR_INIT("[aio]", 5);
+	struct file *file;
+	struct path path;
+	struct inode *inode = alloc_anon_inode(aio_mnt->mnt_sb);
+	if (IS_ERR(inode))
+		return ERR_CAST(inode);
+
+	inode->i_mapping->a_ops = &aio_ctx_aops;
+	inode->i_mapping->private_data = ctx;
+	inode->i_size = PAGE_SIZE * nr_pages;
+
+	path.dentry = d_alloc_pseudo(aio_mnt->mnt_sb, &this);
+	if (!path.dentry) {
+		iput(inode);
+		return ERR_PTR(-ENOMEM);
+	}
+	path.mnt = mntget(aio_mnt);
+
+	d_instantiate(path.dentry, inode);
+	file = alloc_file(&path, FMODE_READ | FMODE_WRITE, &aio_ring_fops);
+	if (IS_ERR(file)) {
+		path_put(&path);
+		return file;
+	}
+
+	file->f_flags = O_RDWR;
+	return file;
+}
+
+static struct dentry *aio_mount(struct file_system_type *fs_type,
+				int flags, const char *dev_name, void *data)
+{
+	static const struct dentry_operations ops = {
+		.d_dname	= simple_dname,
+	};
+	struct dentry *root = mount_pseudo(fs_type, "aio:", NULL, &ops,
+					   AIO_RING_MAGIC);
+
+	if (!IS_ERR(root))
+		root->d_sb->s_iflags |= SB_I_NOEXEC;
+	return root;
+}
+
 /* aio_setup
  *	Creates the slab caches used by the aio routines, panic on
  *	failure as this is done early during the boot sequence.
