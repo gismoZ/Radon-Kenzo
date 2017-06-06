@@ -56,8 +56,8 @@ elif [ $qc == 1 ]; then
 git apply -R qc.patch > /dev/null 2>&1
 fi
 make cyanogenmod_kenzo_defconfig
-export KBUILD_BUILD_HOST="lenovo"
-export KBUILD_BUILD_USER="umang"
+export KBUILD_BUILD_HOST="Zeus"
+export KBUILD_BUILD_USER="gismo"
 make -j4
 time=$(date +"%d-%m-%y-%T")
 $DTBTOOL -2 -o $KERNEL_DIR/arch/arm64/boot/dt.img -s 2048 -p $KERNEL_DIR/scripts/dtc/ $KERNEL_DIR/arch/arm/boot/dts/
