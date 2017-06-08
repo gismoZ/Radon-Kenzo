@@ -56,7 +56,7 @@ git apply qc.patch
 elif [ $qc == 1 ]; then
 git apply -R qc.patch > /dev/null 2>&1
 fi
-make cyanogenmod_kenzo_defconfig
+make lineage_kenzo_defconfig
 export KBUILD_BUILD_HOST="Zeus"
 export KBUILD_BUILD_USER="gismo"
 make -j4
