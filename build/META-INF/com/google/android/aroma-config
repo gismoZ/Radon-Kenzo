@@ -88,6 +88,12 @@ selectbox(
   "No, stock unmodified colors","",0
 );
 
+selectbox(
+  "\n\nDisable audio codec power gating ?","<@center><b>\n\n\n\n\n\nThis needs to be disabled for some audio mods, keep it enabled if you don't know what it is.\n</b></@>","","pgt.prop",
+  "Enabled (stock)","",1,
+  "Yes, disable it","",0
+);
+
 setvar("retstatus",
 install(
   "\nInstalling",
