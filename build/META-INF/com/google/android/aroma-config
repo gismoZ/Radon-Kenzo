@@ -1,7 +1,7 @@
 ini_set("rom_name",             "SecureRadon");
-ini_set("rom_version",          "v5.3.1");
+ini_set("rom_version",          "v5.3.2");
 ini_set("rom_device",           "Kenzo, Kate");
-ini_set("rom_date",             "August 09, 2017");
+ini_set("rom_date",             "August 11, 2017");
 
 ini_set("force_colorspace","rgba");
 #ini_set("dp","6");
@@ -61,9 +61,9 @@ selectbox(
 
 selectbox(
   "\n\nSet your default tuning","<@center><b>\n\n\n\n\n\n\nThis will tune your default kernel settings according to your requirement. Only use interactive governor for maximum results.\n</b></@>","","interactive.prop",
-  "Balanced config","",0,
   "Battery config","",0,
-  "Gaming config","",1
+  "Balanced config","",0,
+  "Performance config","",1
 );
 
 selectbox(
@@ -73,7 +73,7 @@ selectbox(
 );
 
 selectbox(
-  "\n\n<@center>Select quick charging support\nWarning ! </@>","<@center><b>\n\n\n\n\n\n\nThis will set your max charging rate limit.\nThis does not affect users with stock charger.\n</b></@>","","crate.prop",
+  "\n\n<@center>Select quick charging support\nWarning ! </@>","<@center><b>\n\n\n\n\n\n\nThis will set your max charging rate limit.\nThis does not affect users with stock charger.\nBy using 2400mA, there are chances that your device will be damaged.\nUse this feature at your own risk!\n</b></@>","","crate.prop",
   "2000 mA (default)","",1,
   "2400 mA (quick)","",0
 );
