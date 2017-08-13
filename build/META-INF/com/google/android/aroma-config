@@ -86,6 +86,12 @@ selectbox(
 );
 
 selectbox(
+  "\n\n<@center>Sound control</@>","<@center><b>\n\n\n\n\n\n\nDo you want to set default speaker and volume boost to +7?\n</b></@>","","volboost.prop",
+  "Yes","",1,
+  "No","",0
+);
+
+selectbox(
   "\n\nDisable audio codec power gating ?","<@center><b>\n\n\n\n\n\n\nThis needs to be disabled for some audio mods, keep it enabled if you don't know what it is.\n</b></@>","","pgt.prop",
   "Enabled (stock)","",1,
   "Yes, disable it","",0

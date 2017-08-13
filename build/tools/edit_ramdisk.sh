@@ -208,6 +208,17 @@ echo "write /sys/module/wakeup/parameters/enable_wlan_ws 0" >> $CONFIGFILE
 echo "write /sys/module/wakeup/parameters/enable_timerfd_ws 0" >> $CONFIGFILE
 echo "write /sys/module/wakeup/parameters/enable_netlink_ws 0" >> $CONFIGFILE
 echo "write /sys/module/wakeup/parameters/enable_netmgr_wl_ws 0" >> $CONFIGFILE
+VOLBOOST=$(cat /tmp/aroma/volboost.prop | cut -d '=' -f2)
+if [ $VOLBOOST == 1 ]; then
 echo "" >> $CONFIGFILE
+echo "# SPEAKER BOOST" >> $CONFIGFILE
+echo "write /sys/devices/virtual/misc/soundcontrol/speaker_boost 7" >> $CONFIGFILE
+echo "" >> $CONFIGFILE
+echo "# VOLUME BOOST" >> $CONFIGFILE
+echo "write /sys/devices/virtual/misc/soundcontrol/volume_boost 7" >> $CONFIGFILE
+echo "" >> $CONFIGFILE
+elif [ $DFSC == 2 ]; then
+echo "" >> $CONFIGFILE
+fi
 echo "# RUN USERTWEAKS SERVICE" >> $CONFIGFILE
 echo "start usertweaks" >> $CONFIGFILE
