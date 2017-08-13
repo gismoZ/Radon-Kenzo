@@ -217,7 +217,7 @@ echo "" >> $CONFIGFILE
 echo "# VOLUME BOOST" >> $CONFIGFILE
 echo "write /sys/devices/virtual/misc/soundcontrol/volume_boost 7" >> $CONFIGFILE
 echo "" >> $CONFIGFILE
-elif [ $DFSC == 2 ]; then
+elif [ $VOLBOOST == 2 ]; then
 echo "" >> $CONFIGFILE
 fi
 echo "# RUN USERTWEAKS SERVICE" >> $CONFIGFILE
