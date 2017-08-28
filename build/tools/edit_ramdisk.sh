@@ -211,11 +211,11 @@ echo "write /sys/module/wakeup/parameters/enable_netmgr_wl_ws 0" >> $CONFIGFILE
 VOLBOOST=$(cat /tmp/aroma/volboost.prop | cut -d '=' -f2)
 if [ $VOLBOOST == 1 ]; then
 echo "" >> $CONFIGFILE
-echo "# SPEAKER BOOST" >> $CONFIGFILE
-echo "write /sys/devices/virtual/misc/soundcontrol/speaker_boost 7" >> $CONFIGFILE
+echo "# SPEAKER GAIN" >> $CONFIGFILE
+echo "write /sys/kernel/sound_control/speaker_gain 7" >> $CONFIGFILE
 echo "" >> $CONFIGFILE
-echo "# VOLUME BOOST" >> $CONFIGFILE
-echo "write /sys/devices/virtual/misc/soundcontrol/volume_boost 7" >> $CONFIGFILE
+echo "# HEADPHONE GAIN" >> $CONFIGFILE
+echo "write /sys/kernel/sound_control/headphone_gain 7 7" >> $CONFIGFILE
 echo "" >> $CONFIGFILE
 elif [ $VOLBOOST == 2 ]; then
 echo "" >> $CONFIGFILE

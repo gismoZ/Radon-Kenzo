@@ -86,7 +86,7 @@ selectbox(
 );
 
 selectbox(
-  "\n\n<@center>Sound control</@>","<@center><b>\n\n\n\n\n\n\nDo you want to set default speaker and volume boost to +7?\n</b></@>","","volboost.prop",
+  "\n\n<@center>Sound control</@>","<@center><b>\n\n\n\n\n\n\nDo you want to set speaker and headphone gain to +7?\n</b></@>","","volboost.prop",
   "Yes","",1,
   "No","",0
 );
