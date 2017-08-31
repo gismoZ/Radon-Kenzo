@@ -214,9 +214,6 @@ echo "" >> $CONFIGFILE
 echo "# SPEAKER GAIN" >> $CONFIGFILE
 echo "write /sys/kernel/sound_control/speaker_gain 7" >> $CONFIGFILE
 echo "" >> $CONFIGFILE
-echo "# HEADPHONE GAIN" >> $CONFIGFILE
-echo "write /sys/kernel/sound_control/headphone_gain 7 7" >> $CONFIGFILE
-echo "" >> $CONFIGFILE
 elif [ $VOLBOOST == 2 ]; then
 echo "" >> $CONFIGFILE
 fi
