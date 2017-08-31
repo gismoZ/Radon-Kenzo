@@ -169,7 +169,7 @@ echo "write /sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq $FMB" >> $CONF
 echo "write /sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq $FMAB" >> $CONFIGFILE
 echo "" >> $CONFIGFILE
 echo "# ENABLE BCL & CORE CTL" >> $CONFIGFILE
-echo "write /sys/module/msm_thermal/core_control/enabled 1">> $CONFIGFILE
+echo "write /sys/module/msm_thermal/core_control/enabled 0">> $CONFIGFILE
 echo "write /sys/devices/soc.0/qcom,bcl.56/mode disable" >> $CONFIGFILE
 echo "write /sys/devices/soc.0/qcom,bcl.56/hotplug_mask 48" >> $CONFIGFILE
 echo "write /sys/devices/soc.0/qcom,bcl.56/hotplug_soc_mask 32" >> $CONFIGFILE

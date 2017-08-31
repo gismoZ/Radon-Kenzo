@@ -6,7 +6,7 @@ ini_set("rom_date",             "August 28, 2017");
 ini_set("force_colorspace","rgba");
 #ini_set("dp","6");
 
-fontresload( "0", "ttf/Roboto-Regular.ttf", "11" );
+fontresload( "0", "ttf/Roboto-Regular.ttf", "12" );
 fontresload( "1", "ttf/Roboto-Regular.ttf", "16" ); 
 
 theme("default");
@@ -90,6 +90,12 @@ selectbox(
   "Yes","",1,
   "No","",0
 );
+
+selectbox(
+  "\n\nWant old thermal engine ?","<@center><b>\n\n\n\n\n\n\nIf you have any slow charging issue then only it is recommended to select yes here.\n</b></@>","","thermal.prop",
+  "Yes, old thermal","",0,
+  "No, new thermal","",1
+ );
 
 setvar("retstatus",
 install(
