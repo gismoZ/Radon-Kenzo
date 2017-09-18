@@ -766,7 +766,6 @@ sg_common_write(Sg_fd * sfp, Sg_request * srp,
 		sg_finish_rem_req(srp);
 		return k;	/* probably out of space --> ENOMEM */
 	}
-
 	if (sdp->detached) {
 		if (srp->bio) {
 			if (srp->rq->cmd != srp->rq->__cmd)
