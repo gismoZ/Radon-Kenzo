@@ -1,4 +1,4 @@
-ini_set("rom_name",             "SecureRadon");
+ini_set("rom_name",             "SecuRadon");
 ini_set("rom_version",          "v5.6.7");
 ini_set("rom_device",           "Kenzo, Kate");
 ini_set("rom_date",             "October 05, 2017");
@@ -12,7 +12,7 @@ fontresload( "1", "ttf/Roboto-Regular.ttf", "16" );
 theme("default");
 
 viewbox(
-    "\nSecureRadon Kernel",
+    "\nSecuRadon Kernel",
 
     "<@center><b>\n" + ini_get("rom_device") + "</b>\n\n</@>" +
     "\n\n\n\n  VERSION\t: <b><#selectbg_g>"+ini_get("rom_version")+"</#></b>\n" +
@@ -100,7 +100,7 @@ selectbox(
 setvar("retstatus",
 install(
   "\nInstalling",
-  "<@center>\nInstalling SecureRadon Kernel\nPlease wait</@>",
+  "<@center>\nInstalling SecuRadon Kernel\nPlease wait</@>",
   "")
 );
 
