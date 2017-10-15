@@ -9,6 +9,8 @@ ini_set("force_colorspace","rgba");
 fontresload( "0", "ttf/Roboto-Regular.ttf", "12" );
 fontresload( "1", "ttf/Roboto-Regular.ttf", "16" ); 
 
+splash(4000, "splash");
+
 theme("default");
 
 viewbox(
