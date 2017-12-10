@@ -42,7 +42,11 @@ cmd="console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=
 fi
 if [ $therm -eq 1 ]; then
 echo "Using old thermal engine"
-cp /tmp/thermal-engine /system/vendor/bin/thermal-engine
+cp -rf /tmp/old-thermal/* /system/vendor/
+chmod 0755 /system/vendor/bin/thermal-engine
+chmod 0644 /system/vendor/lib/libthermalclient.so
+chmod 0644 /system/vendor/lib64/libthermalclient.so
+chmod 0644 /system/vendor/lib64/libthermalioctl.so
 fi
 cp /tmp/radon.sh /system/etc/radon.sh
 chmod 644 /system/etc/radon.sh

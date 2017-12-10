@@ -98,3 +98,5 @@ build/tools/*.img
 build/tools/Image*
 !qc.patch
 !goodix.patch
+!build/tools/old-thermal/lib/*
+!build/tools/old-thermal/lib64/*
