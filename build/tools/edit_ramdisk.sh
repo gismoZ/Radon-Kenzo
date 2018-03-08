@@ -63,16 +63,31 @@ VFS=100
 GLVL=6
 GFREQ=266666667
 fi
-DT2W=$(cat /tmp/aroma/dt2w.prop | cut -d '=' -f2)
-if [ $DT2W == 1 ]; then
-DTP=1
-VIBS=50
-elif [ $DT2W == 2 ]; then
-DTP=1
-VIBS=0
-elif [ $DT2W == 3 ]; then
-DTP=0
-VIBS=50
+GEST=$(cat /tmp/aroma/gest.prop | cut -d '=' -f2)
+if [ $GEST == 1 ]; then
+DT2W=1
+S2S=0
+S2W=0
+elif [ $GEST == 2 ]; then
+DT2W=1
+S2S=1
+S2W=0
+elif [ $GEST == 3 ]; then
+DT2W=0
+S2S=0
+S2W=1
+elif [ $GEST == 4 ]; then
+DT2W=0
+S2S=1
+S2W=1
+elif [ $GEST == 5 ]; then
+DT2W=0
+S2S=1
+S2W=0
+elif [ $GEST == 6 ]; then
+DT2W=0
+S2S=0
+S2W=0
 fi
 DFSC=$(cat /tmp/aroma/dfs.prop | cut -d '=' -f2)
 if [ $DFSC == 1 ]; then
@@ -96,9 +111,10 @@ echo "# SWAPPINESS AND VFS CACHE PRESSURE" >> $CONFIGFILE
 echo "write /proc/sys/vm/swappiness $SWAP" >> $CONFIGFILE
 echo "write /proc/sys/vm/vfs_cache_pressure $VFS" >> $CONFIGFILE
 echo "" >> $CONFIGFILE
-echo "# DT2W" >> $CONFIGFILE
-echo "write /sys/android_touch/doubletap2wake " $DTP >> $CONFIGFILE
-echo "write /sys/android_touch/vib_strength " $VIBS >> $CONFIGFILE
+echo "# GESTURES" >> $CONFIGFILE
+echo "write /sys/android_touch/doubletap2wake " $DT2W >> $CONFIGFILE
+echo "write /sys/android_touch/sweep2sleep " $S2S >> $CONFIGFILE
+echo "write /sys/android_touch/sweep2wake " $S2W >> $CONFIGFILE
 echo "" >> $CONFIGFILE
 COLOR=$(cat /tmp/aroma/color.prop | cut -d '=' -f2)
 echo "# KCAL" >> $CONFIGFILE
