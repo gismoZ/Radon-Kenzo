@@ -68,26 +68,32 @@ if [ $GEST == 1 ]; then
 DT2W=1
 S2S=0
 S2W=0
+VIB=0
 elif [ $GEST == 2 ]; then
 DT2W=1
 S2S=1
 S2W=0
+VIB=0
 elif [ $GEST == 3 ]; then
 DT2W=0
 S2S=0
 S2W=1
+VIB=0
 elif [ $GEST == 4 ]; then
 DT2W=0
 S2S=1
 S2W=1
+VIB=0
 elif [ $GEST == 5 ]; then
 DT2W=0
 S2S=1
 S2W=0
+VIB=0
 elif [ $GEST == 6 ]; then
 DT2W=0
 S2S=0
 S2W=0
+VIB=0
 fi
 DFSC=$(cat /tmp/aroma/dfs.prop | cut -d '=' -f2)
 if [ $DFSC == 1 ]; then
@@ -115,6 +121,7 @@ echo "# GESTURES" >> $CONFIGFILE
 echo "write /sys/android_touch/doubletap2wake " $DT2W >> $CONFIGFILE
 echo "write /sys/android_touch/sweep2sleep " $S2S >> $CONFIGFILE
 echo "write /sys/android_touch/sweep2wake " $S2W >> $CONFIGFILE
+echo "write /sys/android_touch/vib_strength " $VIB >> $CONFIGFILE
 echo "" >> $CONFIGFILE
 COLOR=$(cat /tmp/aroma/color.prop | cut -d '=' -f2)
 echo "# KCAL" >> $CONFIGFILE
