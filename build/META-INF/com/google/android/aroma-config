@@ -1,8 +1,8 @@
 ini_set("rom_name",             "SecuRadon");
-ini_set("rom_version",          "v6.1.16 KSPL: 2018-10-05");
+ini_set("rom_version",          "v6.1.17 KSPL: 2018-11-05");
 ini_set("rom_author",		"gismoZ");
 ini_set("rom_device",           "Kenzo, Kate");
-ini_set("rom_date",             "October 16, 2018");
+ini_set("rom_date",             "November 14, 2018");
 
 ini_set("force_colorspace","rgba");
 #ini_set("dp","6");
