@@ -848,19 +848,26 @@ eHalStatus sme_RrmIssueScanReq( tpAniSirGlobal pMac )
   \sa
   
   --------------------------------------------------------------------------*/
-void sme_RrmProcessBeaconReportReqInd(tpAniSirGlobal pMac, void *pMsgBuf)
+eHalStatus sme_RrmProcessBeaconReportReqInd(tpAniSirGlobal pMac, void *pMsgBuf)
 {
    tpSirBeaconReportReqInd pBeaconReq = (tpSirBeaconReportReqInd) pMsgBuf;
    tpRrmSMEContext pSmeRrmContext = &pMac->rrm.rrmSmeContext;
    tANI_U32 len = 0, i = 0;
+   eHalStatus status = eHAL_STATUS_SUCCESS;
 
 #if defined WLAN_VOWIFI_DEBUG
    smsLog( pMac, LOGE, "Received Beacon report request ind Channel = %d", pBeaconReq->channelInfo.channelNum );
 #endif
-   //section 11.10.8.1 (IEEE Std 802.11k-2008) 
+
+   if (pBeaconReq->channelList.numChannels > SIR_ESE_MAX_MEAS_IE_REQS) {
+         smsLog( pMac, LOGP, "Beacon report request numChannels: %u exceeds "
+                "max num channels", pBeaconReq->channelList.numChannels);
+         return eHAL_STATUS_FAILURE;
+   }
+   //section 11.10.8.1 (IEEE Std 802.11k-2008)
    //channel 0 and 255 has special meaning.
-   if( (pBeaconReq->channelInfo.channelNum == 0)  || 
-       ((pBeaconReq->channelInfo.channelNum == 255) && (pBeaconReq->channelList.numChannels == 0) ) ) 
+   if( (pBeaconReq->channelInfo.channelNum == 0)  ||
+       ((pBeaconReq->channelInfo.channelNum == 255) && (pBeaconReq->channelList.numChannels == 0) ) )
    {
       //Add all the channel in the regulatory domain.
       wlan_cfgGetStrLen( pMac, WNI_CFG_VALID_CHANNEL_LIST, &len );
@@ -868,7 +875,7 @@ void sme_RrmProcessBeaconReportReqInd(tpAniSirGlobal pMac, void *pMsgBuf)
       if( pSmeRrmContext->channelList.ChannelList == NULL )
       {
          smsLog( pMac, LOGP, FL("vos_mem_malloc failed:") );
-         return;
+         return eHAL_STATUS_FAILURE;
       }
 #if defined WLAN_VOWIFI_DEBUG
       smsLog( pMac, LOGE, FL("Allocated memory for ChannelList") );
@@ -880,7 +887,7 @@ void sme_RrmProcessBeaconReportReqInd(tpAniSirGlobal pMac, void *pMsgBuf)
 #endif
    }
    else
-   { 
+   {
       len = 0;
       pSmeRrmContext->channelList.numOfChannels = 0;
 
@@ -899,7 +906,7 @@ void sme_RrmProcessBeaconReportReqInd(tpAniSirGlobal pMac, void *pMsgBuf)
       if( pSmeRrmContext->channelList.ChannelList == NULL )
       {
          smsLog( pMac, LOGP, FL("vos_mem_malloc failed") );
-         return;
+         return eHAL_STATUS_FAILURE;
       }
 #if defined WLAN_VOWIFI_DEBUG
       smsLog( pMac, LOGE, FL("Allocated memory for ChannelList") );
@@ -935,7 +942,7 @@ void sme_RrmProcessBeaconReportReqInd(tpAniSirGlobal pMac, void *pMsgBuf)
    vos_mem_copy( pSmeRrmContext->bssId, pBeaconReq->macaddrBssid, sizeof(tSirMacAddr) );
 
    //Copy ssid
-   vos_mem_copy( &pSmeRrmContext->ssId, &pBeaconReq->ssId, sizeof(tAniSSID) ); 
+   vos_mem_copy( &pSmeRrmContext->ssId, &pBeaconReq->ssId, sizeof(tAniSSID) );
 
    pSmeRrmContext->token = pBeaconReq->uDialogToken;
    pSmeRrmContext->regClass = pBeaconReq->channelInfo.regulatoryClass;
@@ -945,9 +952,9 @@ void sme_RrmProcessBeaconReportReqInd(tpAniSirGlobal pMac, void *pMsgBuf)
    vos_mem_copy((tANI_U8*)&pSmeRrmContext->measMode, (tANI_U8*)&pBeaconReq->fMeasurementtype, SIR_ESE_MAX_MEAS_IE_REQS);
    vos_mem_copy((tANI_U8*)&pSmeRrmContext->duration, (tANI_U8*)&pBeaconReq->measurementDuration, SIR_ESE_MAX_MEAS_IE_REQS);
 
-   sme_RrmIssueScanReq( pMac );
+   status = sme_RrmIssueScanReq( pMac );
 
-   return;
+   return status;
 }
 
 /*--------------------------------------------------------------------------
